@@ -1,14 +1,14 @@
 # Image Processing
 
 ## Acknowledgement
-When reviewing this section, resources I used or consulted include:
+When reviewing this section, resources I used or consulted include [blogs on web.dev](https://web.dev/fast/#set-performance-budgets)
 
 ## Table of Contents
 ---
  - [Image Performance](#image-performance)
     - [Image Sizes](#image-sizes)
  - [Image Optimization](#image-optimization-compression)
-     - [Choosing the right image formats](#image-formats)
+     - [Choosing the right image formats](#choosing-the-right-image-formats)
      - [Raster versus Vector formats](#raster-versus-vector-formats)
      - [Pictures, sources, img tags](#picture-source-img-tags)
  - [Fallback Images](#fallback-images)
@@ -22,20 +22,31 @@ Problem: using solely CSS to make images responsive won’t improve performance 
 Performance is an important part of the user experience and it affects business metrics. It's tempting to think that if you are a good developer you'll end up with a performant site, but the truth is that good performance is rarely a side effect. As with most other things—to reach a goal you have to define it clearly. Start the journey by setting a performance budget.
 
 
-## Image Sizes
+### **Image Sizes**
 ## Image Optimization (Compression)
 
-### Choosing the right image formats
-jpeg, png, webg
-
-### Raster versus Vector formats:
+### **Raster versus Vector formats:**
 - Vector graphics use lines, points, and polygons to represent an image.
 - Raster graphics represent an image by encoding the individual values of each pixel within a rectangular grid.
 
-However, vector formats fall short when the scene is complicated
+However, vector formats fall short when the scene is complicated.
+### **Choosing the right image formats**
+In addition to different lossy and lossless compression algorithms, different image formats support different features such as animation and transparency (alpha) channels. 
+As a result, the choice of the "right format" for a particular image is a combination of desired visual results and functional requirements.
 
-For each dev tools that we use 
-### ```<Picture>, <source>, <img>``` tags
+|Format |Transparency| Animation | Browser |
+|-----|--------|-------------|-------------|
+|PNG  | Yes  |  No | All                   |
+|JPEG |  No  | Yes | All                   |
+|WebP | Yes  | Yes | All modern browsers   |
+
+PNG and JPEG are the two universally supported **raster** image formats.
+
+### WebP imaged
+File sizes for WebP images are typically smaller than their JPEG and PNG counterparts. If your application involves showing a lot of images then probably it makes sense to add WebP support.
+
+
+### **```<Picture>, <source>, <img>``` tags**
 Before:
 ```HTML
 <img src="flower.jpg" alt="">
@@ -62,7 +73,6 @@ If the browser does not support any of the formats listed in the ```<source>``` 
 
     - The <source> tag for the "preferred" image format (in this case that is WebP) should be listed first, before other <source> tags. 
     - The value of the type attribute should be the MIME type corresponding to the image format. An image's MIME type and its file extension are often similar, but they aren't necessarily the same thing (e.g. .jpg vs. image/jpeg).
-
 
 
 ## Fallback Images
