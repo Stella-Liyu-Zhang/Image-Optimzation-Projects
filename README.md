@@ -4,7 +4,6 @@
 When reviewing this section, resources I used or consulted include [blogs on web.dev](https://web.dev/fast/#set-performance-budgets)
 
 ## Table of Contents
----
  - [Image Performance](#image-performance)
     - [Image Sizes](#image-sizes)
  - [Image Optimization](#image-optimization-compression)
