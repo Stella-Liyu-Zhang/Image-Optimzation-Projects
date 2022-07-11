@@ -6,41 +6,70 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="imageFormat.css">
-  <script src = "imageFormat.js" type = "module"></script>
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <main>
-    <section id = "content">
-      <label for="image_options">
-        Choose an Image Type
-        <select name="image_options" id="image_options">
-          <option value="glitter">glitter</option>
-          <option value="mountain">mountain</option>
-          <option value="transparent">transparent</option>
-          <option value="logo">logo</option>
-          <option value="animated">animated</option>
-        </select>
-      </label>
-    </section>
+  <!-- <script src = "image.js" type = "module"></script> -->
 
-    <section>
-      <ul>
-        <li>
-          <figure>
-            <figcaption>
-              <p>jpg</p>
-              <p>259KB</p>
-            </figcaption>
-            <picture>
-              <source>
-              <img src="" alt="">
-            </picture>
-          </figure>
-          
-        </li>
-      </ul>
-    </section>
+  <main>
+   <!--
+image: https://unsplash.com/photos/DA_tplYgTow
+-->
+<div class="container--tabs">
+  <section class="row">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab-1">Original</a></li>
+      <li class=""><a href="#tab-2">JPEG</a></li>
+      <li class=""><a href="#tab-3">WebP</a></li>
+      <li class=""><a href="#tab-4">AVIF</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="tab-1" class="tab-pane active"> 
+        <span class="glyphicon glyphicon-leaf glyphicon--home--feature two columns text-center"></span>
+        <span class="col-md-10">
+          <img 
+         src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632192059/smashing-articles/ayousef-espanioly-DA_tplYgTow-unsplash.jpg"
+               width="100%"
+               alt="Original"/>
+        </span>
+      </div> 
+      <div id="tab-2" class="tab-pane">
+        <span class="glyphicon glyphicon-fire glyphicon--home--feature two columns text-center"></span>
+        <span class="col-md-10">
+          <img 
+         src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632192016/smashing-articles/289-jpeg-ayousef-espanioly-DA_tplYgTow-unsplash.jpg"
+               width="100%"
+               alt="Original"/>
+        </span>
+      </div>
+      <div id="tab-3" class="tab-pane">
+        <span class="glyphicon glyphicon-tint glyphicon--home--feature two columns text-center"></span>
+        <span class="col-md-10">
+          <img 
+         src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632192015/smashing-articles/206-webp-ayousef-espanioly-DA_tplYgTow-unsplash.webp"
+               width="100%"
+               alt="Original"/>
+        </span>
+      </div>
+      
+      <div id="tab-4" class="tab-pane">
+        <span class="glyphicon glyphicon-tint glyphicon--home--feature two columns text-center"></span>
+        <span class="col-md-10">
+          <picture>
+            <source srcset="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632192015/smashing-articles/101-avif-ayousef-espanioly-DA_tplYgTow-unsplash.avif" type="image/avif">
+                        <source srcset="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632192015/smashing-articles/101-avif-ayousef-espanioly-DA_tplYgTow-unsplash.png">
+          <img 
+         src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632192015/smashing-articles/101-avif-ayousef-espanioly-DA_tplYgTow-unsplash.png"
+               width="100%"
+               alt="Original"/>
+          </picture>
+        </span>
+      </div>
+      
+      
+    </div>
+  </section>
+</div>
   </main>
 </body>
 </html>

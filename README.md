@@ -5,28 +5,66 @@ When reviewing this section, resources I used or consulted include [blogs on web
 
 For questions that I came across, I also consulted my mentor *Camdyn Rasque*.
 
+## Purpose of Image optimzation
+Why should I optimize my images?
+When we are shipping code and hitting deadlines, it’s easy to forget about optimizing your images. 
+But the truth is, if we don’t optimize our images we are losing money. Web pages with optimized images load faster. 
+Faster pages have 
+- higher conversion rates, 
+- lower bounce rates, and 
+- Better user experiences
+- smaller images reduce bandwidth costs (the monthly fees for any Content Delivery Network services and other Internet telecommunications charges) for you and your visitors.
 ## Table of Contents
- - [Image Performance](#image-performance)
-    - [Image Sizes](#image-sizes)
- - [Image Optimization](#image-optimization-compression)
-     - [Choosing the right image formats](#choosing-the-right-image-formats)
-     - [Raster versus Vector formats](#raster-versus-vector-formats)
-     - [Pictures, sources, img tags](#picture-source-img-tags)
+---
+ - [Terms](#terms)
+    - [Lossless and lossy compressions](#lossless-and-lossy-compressions)
+    - [Transparency](#transparency)
+    - [DPI](#dpi)
+ - [Image Optimization (Compression)](#image-optimization-compression)
+ - [Image formats](#image-formats)
+    - [Bitmap Images](#bitmap-images-raster-images) 
+        - [Graphic File formats for saving bitmaps in files](#graphic-file-formats-for-saving-bitmaps-in-files)
+        - [Choosing the right Bitwise image formats](#choosing-the-right-image-formats)
+    - [Vector Images](#vector-images)
+    - [Pictures, sources, img tags](#picture-source-img-tags)
  - [Fallback Images](#fallback-images)
  - [Accessibility](#accessibility)
     - [alt attributes](#alt-attributes)
     - [long desc attributes](#long-desc-attributes)
     - [width/height attributes](#widthheight-attributes)
-## Image Performance
-Problem: using solely CSS to make images responsive won’t improve performance and page load times, as you’re still serving the same size image for all devices. For instance, loading a 2000px image on mobile comes with a huge (and unnecessary) overhead.
-
 ## Terms
- ### Lossless and lossy compressions 
-    - With lossless compression, every bit of data originally in a file remains after it is uncompressed, and all the information is restored. 
-    - Lossy compression reduces a file by permanently eliminating certain information, especially redundant information.
-## Image Sizes
+ ### Lossless and lossy compressions
+- With lossless compression, every bit of data originally in a file remains after it is uncompressed, and all the information is restored. 
+- Lossy compression reduces a file by permanently eliminating certain information, especially redundant information.
+### Transparency 
+There are 3 major types of transparency:
+  - First type - None
+     - the bitmap is a rectangle and will obscure every pixel below it
+  - Second type - binary
+     - either completely transparent or completely opaque
+  - Third type - Many bits of transparency (commonly 8)
+     - i.e. 256 values from 0-100% for each pixel
+     - provide an image that has finer graduations than the human eye can discern### Image Sizes
+
+### RGB component 
+1. storing color value itself,
+   - RGB component
+     - least effective as human eyes can capture more color
+     - inefficient for common operations such as brighten
+2. transparency of each pixel
+   - critical for edge of non-rectangular images
+   - each pixel needs to have its level of transparency(opacity) set from 0% to 100%
+3. Bitmap metadata
+   - information about the image which can range from color table and resolution to the owner of the image
+
+Due to the large amount of byte a bitmap takes up, compression is **the key for a new format to develop**.
+
+### DPI
+- DPI stands for Dots Per Inch. This is a term, originally from printing, that refers to how many printed dots there are in one inch of your printed document. It’s now a term used across computing to allow you to determine the quality and resolution of a photo or image.
+- The higher the value, the more detailed and sharper your image will be. Images with higher DPI values can also be zoomed in much further before pixelation begins to occur.
+
 ## Image Optimization (Compression)
-## Raster versus Vector formats:
+## Image formats:
 - Vector graphics use lines, points, and polygons to represent an image.
 - Raster graphics represent an image by encoding the individual values of each pixel within a rectangular grid.
 
@@ -130,50 +168,43 @@ As a result, the choice of the "right format" for a particular image is a combin
 | PNG    | Yes          | No        | Lossless         | interlaced            | ok          | Yes                            |
 | GIF    | Yes          | Yes       | Lossless         | interlaced            | ok          | Yes                            |
 
-PNG and JPEG are the two universally supported **raster** image formats.
-
-## 
-1. storing color value itself,
-   - RGB component
-     - least effective as human eyes can capture more color
-     - inefficient for common operations such as brighten
-2. transparency of each pixel
-   - critical for edge of non-rectangular images
-   - each pixel needs to have its level of transparency(opacity) set from 0% to 100%
-3. Bitmap metadata
-   - information about the image which can range from color table and resolution to the onwer of the image
-
-Due to the large amount of byte a bitmap takes up, compression is the key for a new format to develop
-
-## Compression
-
-- lossy compression
-  - Finding patterns that repeat in a file and then in a second case just point back to the first run
-  - uses exclusively for pictures and never in games
-- Lossless compression
-  - compress with no loss of information
-  - compressing the image takes more time than decompressing them
-  - not idea to store in a lossless format on the fly
-
-## Transparency
-
-- has three types
-  1. First type - None
-  - the bitmap is a rectangle and will obscure every pixel below it
-  2. Second type - binary
-  - either completely transparent or completely opaque
-  3. Third type - Many bits of transparency (commonly 8)
-     - i.e. 256 values from 0-100% for each pixel
-     - provide an image that has finer graduations than the human eye can discern
-
-## Resolution
-
-- normally described as DPI (Dots Per Inch)
-- need to provide the ability for the calling program to se the DPI
-
 ## Vector Images
+- More specifically, a vector graphic is an artwork made up of points, lines, and curves that are based upon mathematical equations, rather than solid colored square pixels.
+- Vector files uses vector data with specific magnitude and direction to draw on screen
+- Best use cases: logo, diagram, animated elements, charts, and graphs
+- Worst use cases: photo
+- The most popular used file format would be SVG (Scalable Vector Graphic), with the occasional usage of PDF files having vector graphics.
 
+### Pros of Vector Images: 
+- text in vector images remains accessible
+- with SVG, can easily styling and scripting, because each component of the image is an element that can be styled via CSS or scripted via JS
+### Cons of Vector Images:
+- can get complicated quickly
+- complex SVGs can take significant processing time
+- can be harder to create
 
+### **Implementations of SVG:**
+SVG is an XML based language so it's both searchable and indexable
+### Adding SVG using ```<img>``` element 
+Pros:
+- quick, can be made into hyperlink
+- can be cached by the browser
+
+cons:
+- can't manipulate the image with js
+- must use inline css, external stylesheet doesn't work on the file
+- can't restyle with css pseudoclasses
+
+### Add SVG embed into HTML, wrap in ```<svg>``` element
+pros:
+- Saves http request which reduce loading time
+- Can assign attributes to the element
+- Can be made into hyperlink
+
+Cons:
+- Can only be placed in one place
+- Increase size of the HTML file
+- Can't cache inline SVG
 ## ```<Picture>, <source>, <img>``` tags
 Before:
 ```HTML
@@ -214,5 +245,25 @@ If the browser does not support any of the formats listed in the ```<source>``` 
 ## Project 1
 The purpose of project 1 is to see the differences between different image formats.
 
-In this project, we will start with our quality evaluation of JPEG, WebP, and AVIF using the default high-quality output settings of Sq
+In this project, we will start with our quality evaluation of JPEG, WebP, and AVIF using the default high-quality output settings of Squoosh for each format
+
+Intentionally untuned to mimic a new user's experience with them.
+
+As a reminder, you should aim to evaluate the quality configuration and formats that best suit your needs. 
+
+In this first test, encoding a 560KB photo of a sunset (with many textures) produces an image that is visually and perceptually quite similar for each. The output comes in at 289KB (JPEG@q75), 206KB (WebP@q75), and 101KB (AVIF@q30) — up to 81% in compression savings.
 ###
+
+
+## Project 2
+
+Various tools exist for comparing the dissimilarity between different image formats (e.g., DSSIM, simulacra). 
+
+Using these tools, you can approximate the comparable quality setting when evaluating, say, JPEG to WebP or WebP to AVIF. 
+
+Below are the same images encoded at comparable quality, targeting JPEG’s 70% quality. 
+
+The output is 323KB (JPEG), 214KB (WebP@q75), and 117KB (AVIF@60) — sizes are a little larger than trusting the defaults, but the compression wins are still significant.
+
+
+
