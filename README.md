@@ -250,8 +250,8 @@ Intentionally untuned to mimic a new user's experience with them.
 As a reminder, you should aim to evaluate the quality configuration and formats that best suit your needs. 
 
 In this first test, encoding a 560KB photo of a sunset (with many textures) produces an image that is visually and perceptually quite similar for each. The output comes in at 289KB (JPEG@q75), 206KB (WebP@q75), and 101KB (AVIF@q30) — up to 81% in compression savings.
-###
 
+![Project 1](imgs/project%201.png)
 
 ## Project 2
 
@@ -260,7 +260,9 @@ For a more extreme example of the differences between JPEG and AVIF, we can look
 Notice how the JPEG has visible blocky artifacts in the sky and roof. The AVIF is visibly better, containing fewer blocking artifacts. There is, however, a level of texture loss on the roof and some blurriness. It’s still quite impressive, given the overall compression factor is 59x.
 
 
+![Project 2](imgs/project%202.png)
 
 ## Project 3
 Next, let’s evaluate the quality of a beach image with many fine details, textures, and areas of low contrast in the clouds. We will compare the original (at 482KB) to what JPEG, WebP, and AVIF can produce with a 45KB file-size limit (with no advanced tuning) — using Squoosh; this works out at JPEG (MozJPEG) at 50% quality, WebP at 54%, and AVIF at 36%.
 
+![Project 2](imgs/project%203.png)
