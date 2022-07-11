@@ -6,7 +6,6 @@ When reviewing this section, resources I used or consulted include [blogs on web
 For questions that I came across, I also consulted my mentor *Camdyn Rasque*.
 
 ## Table of Contents
----
  - [Image Performance](#image-performance)
     - [Image Sizes](#image-sizes)
  - [Image Optimization](#image-optimization-compression)
