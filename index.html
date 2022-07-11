@@ -6,14 +6,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="imageFormat.css">
+  <script src = "imageFormat.js" type = "module"></script>
 </head>
 <body>
   <main>
-    <picture>
-      <source type="image/webp" srcset="flower.webp">
-      <source type="image/jpeg" srcset="flower.jpg">
-      <img src="flower.jpg" alt="a flower in a background of green">
-  </picture>
+    <section id = "content">
+      <label for="image_options">
+        Choose an Image Type
+        <select name="image_options" id="image_options">
+          <option value="glitter">glitter</option>
+          <option value="mountain">mountain</option>
+          <option value="transparent">transparent</option>
+          <option value="logo">logo</option>
+          <option value="animated">animated</option>
+        </select>
+      </label>
+    </section>
+
+    <section>
+      <ul>
+        <li>
+          <figure>
+            <figcaption>
+              <p>jpg</p>
+              <p>259KB</p>
+            </figcaption>
+            <picture>
+              <source>
+              <img src="" alt="">
+            </picture>
+          </figure>
+          
+        </li>
+      </ul>
+    </section>
   </main>
 </body>
 </html>
