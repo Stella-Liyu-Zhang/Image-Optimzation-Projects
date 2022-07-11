@@ -1,7 +1,7 @@
 # Image Optimization
 
 ## Acknowledgement
-When reviewing this section, resources I used or consulted include [blogs on web.dev](https://web.dev/fast/#set-performance-budgets), [Microsoft Dev doc](https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-types-of-bitmaps-about), [Google Dev doc](https://developers.google.com/speed/webp). 
+When reviewing this section, resources I used or consulted include [blogs on web.dev](https://web.dev/fast/#set-performance-budgets), [Microsoft Dev doc](https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-types-of-bitmaps-about), [Google Dev doc](https://developers.google.com/speed/webp), and [this useful source from smashingmagazing](https://www.smashingmagazine.com/2021/09/modern-image-formats-avif-webp/)
 
 For questions that I came across, I also consulted my mentor *Camdyn Rasque*.
 
@@ -15,7 +15,6 @@ Faster pages have
 - Better user experiences
 - smaller images reduce bandwidth costs (the monthly fees for any Content Delivery Network services and other Internet telecommunications charges) for you and your visitors.
 ## Table of Contents
----
  - [Terms](#terms)
     - [Lossless and lossy compressions](#lossless-and-lossy-compressions)
     - [Transparency](#transparency)
@@ -27,7 +26,6 @@ Faster pages have
         - [Choosing the right Bitwise image formats](#choosing-the-right-image-formats)
     - [Vector Images](#vector-images)
     - [Pictures, sources, img tags](#picture-source-img-tags)
- - [Fallback Images](#fallback-images)
  - [Accessibility](#accessibility)
     - [alt attributes](#alt-attributes)
     - [long desc attributes](#long-desc-attributes)
@@ -235,9 +233,6 @@ If the browser does not support any of the formats listed in the ```<source>``` 
 
     - The <source> tag for the "preferred" image format (in this case that is WebP) should be listed first, before other <source> tags. 
     - The value of the type attribute should be the MIME type corresponding to the image format. An image's MIME type and its file extension are often similar, but they aren't necessarily the same thing (e.g. .jpg vs. image/jpeg).
-
-## Fallback Images
-
 ## Accessibility
 
 ### alt attributes
@@ -260,13 +255,12 @@ In this first test, encoding a 560KB photo of a sunset (with many textures) prod
 
 ## Project 2
 
-Various tools exist for comparing the dissimilarity between different image formats (e.g., DSSIM, simulacra). 
+For a more extreme example of the differences between JPEG and AVIF, we can look at an example from the Kodak dataset (evaluated by Netflix) comparing a JPEG (4:4:4) at 20KB to an AVIF (4:4:4) at 19.8KB. 
 
-Using these tools, you can approximate the comparable quality setting when evaluating, say, JPEG to WebP or WebP to AVIF. 
-
-Below are the same images encoded at comparable quality, targeting JPEG’s 70% quality. 
-
-The output is 323KB (JPEG), 214KB (WebP@q75), and 117KB (AVIF@60) — sizes are a little larger than trusting the defaults, but the compression wins are still significant.
+Notice how the JPEG has visible blocky artifacts in the sky and roof. The AVIF is visibly better, containing fewer blocking artifacts. There is, however, a level of texture loss on the roof and some blurriness. It’s still quite impressive, given the overall compression factor is 59x.
 
 
+
+## Project 3
+Next, let’s evaluate the quality of a beach image with many fine details, textures, and areas of low contrast in the clouds. We will compare the original (at 482KB) to what JPEG, WebP, and AVIF can produce with a 45KB file-size limit (with no advanced tuning) — using Squoosh; this works out at JPEG (MozJPEG) at 50% quality, WebP at 54%, and AVIF at 36%.
 

@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image demo of JPEG, WebP, AVIF</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<script src = "image.js" type = "module"></script> 
+
+  <main>
+    <div class="container--tabs">
+        <section class="row">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-1">Original (482KB)</a></li>
+            <li class=""><a href="#tab-2">JPEG (q50, 45KB)</a></li>
+            <li class=""><a href="#tab-3">WebP (q54, 45KB)</a></li>
+            <li class=""><a href="#tab-4">AVIF (q36, 45KB)</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="tab-1" class="tab-pane active"> 
+              <span class="glyphicon glyphicon-leaf glyphicon--home--feature two columns text-center"></span>
+              <span class="col-md-10">
+                <img 
+               src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632080765/smashing-articles/1300beach.jpg"
+                     width="100%"
+                     alt="Original"/>
+              </span>
+            </div> 
+            <div id="tab-2" class="tab-pane">
+              <span class="glyphicon glyphicon-fire glyphicon--home--feature two columns text-center"></span>
+              <span class="col-md-10">
+                <img 
+               src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632080886/smashing-articles/q50jpg.jpg"
+                     width="100%"
+                     alt="Original"/>
+              </span>
+            </div>
+            <div id="tab-3" class="tab-pane">
+              <span class="glyphicon glyphicon-tint glyphicon--home--feature two columns text-center"></span>
+              <span class="col-md-10">
+                <img 
+               src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632081015/smashing-articles/q54webp.webp"
+                     width="100%"
+                     alt="Original"/>
+              </span>
+            </div>
+  </main>
+</body>
+</html>

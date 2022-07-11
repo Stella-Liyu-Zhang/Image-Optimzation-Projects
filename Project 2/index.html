@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image demo of JPEG, WebP, AVIF</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<script src = "image.js" type = "module"></script> 
+
+  <main>
+    <div class="container--tabs">
+        <section class="row">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-1">Original (700KB)</a></li>
+            <li class=""><a href="#tab-2">JPEG (444, 20KB)</a></li>
+            <li class=""><a href="#tab-3">AVIF (444, 20KB)</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="tab-1" class="tab-pane active"> 
+              <span class="glyphicon glyphicon-leaf glyphicon--home--feature two columns text-center"></span>
+              <span class="col-md-10">
+                <img 
+               src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632083843/smashing-articles/1_vGFkQIIn_Nzsc6VeQnbwAg.png"
+                     width="100%"
+                     alt="Original"/>
+              </span>
+            </div> 
+            <div id="tab-2" class="tab-pane">
+              <span class="glyphicon glyphicon-fire glyphicon--home--feature two columns text-center"></span>
+              <span class="col-md-10">
+                <img 
+               src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632083884/smashing-articles/1_55Zi3QfXNAeW228pPJywrg.png"
+                     width="100%"
+                     alt="Original"/>
+              </span>
+            </div>
+        
+            
+            <div id="tab-3" class="tab-pane">
+              <span class="glyphicon glyphicon-tint glyphicon--home--feature two columns text-center"></span>
+              <span class="col-md-10">
+                <img 
+               src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1632083923/smashing-articles/1_dPXjh-N3O4kOxVZUSjRBeg.png"
+                     width="100%"
+                     alt="Original"/>
+              </span>
+            </div>
+            
+            
+          </div>
+        </section>
+      </div>
+  </main>
+</body>
+</html>
