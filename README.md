@@ -1,4 +1,4 @@
-# Image Processing
+# Image Optimization
 
 ## Acknowledgement
 When reviewing this section, resources I used or consulted include [blogs on web.dev](https://web.dev/fast/#set-performance-budgets), [Microsoft Dev doc](https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-types-of-bitmaps-about), [Google Dev doc](https://developers.google.com/speed/webp). 
@@ -32,6 +32,9 @@ Faster pages have
     - [alt attributes](#alt-attributes)
     - [long desc attributes](#long-desc-attributes)
     - [width/height attributes](#widthheight-attributes)
+ - [Project 1](#project-1)
+ - [Project 2](#project-2)
+ - [Project 3](#project-3)
 ## Terms
  ### Lossless and lossy compressions
 - With lossless compression, every bit of data originally in a file remains after it is uncompressed, and all the information is restored. 
