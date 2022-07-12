@@ -1,7 +1,7 @@
 # Image Optimization
 
 ## Acknowledgement
-When reviewing this section, resources I used or consulted include [blogs on web.dev](https://web.dev/fast/#set-performance-budgets), [Microsoft Dev doc](https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-types-of-bitmaps-about), [Google Dev doc](https://developers.google.com/speed/webp), and [this useful source from smashingmagazing](https://www.smashingmagazine.com/2021/09/modern-image-formats-avif-webp/)
+When reviewing this section, resources I used or consulted include [blogs on web.dev](https://web.dev/fast/#set-performance-budgets), [Microsoft Dev doc](https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-types-of-bitmaps-about), [Google Dev doc](https://developers.google.com/speed/webp), and [this useful technical blog written by Addy Osmani](https://www.smashingmagazine.com/2021/09/modern-image-formats-avif-webp/)
 
 For questions that I came across, I also consulted my mentor *Camdyn Rasque*.
 
@@ -14,6 +14,7 @@ Faster pages have
 - lower bounce rates, and 
 - Better user experiences
 - smaller images reduce bandwidth costs (the monthly fees for any Content Delivery Network services and other Internet telecommunications charges) for you and your visitors.
+
 ## Table of Contents
  - [Terms](#terms)
     - [Lossless and lossy compressions](#lossless-and-lossy-compressions)
@@ -34,43 +35,53 @@ Faster pages have
  - [Project 2](#project-2)
  - [Project 3](#project-3)
 ## Terms
- ### Lossless and lossy compressions
+
+### Parameters that we use to evaluate which image format is suitable includes:
+- Compression
+- Quality
+- Encode/Decode Speed
+- Software Support (eg. Browser support)
+- Animaiton Support
+- Alpha Transparency
+- High dynamic range(HDR) imaging and wide color gamut
+- Progressive decoding to load images gradually allows users to get a reasonable preview of the image before it gets refined.
+- Depth maps that will enable you to apply effects to the foreground or background of the image.
+- Images with multiple overlapping layers, for example, text overlays, borders, and so on.
+
+> **Tip**: We could use Squoosh.app to perform a visual side-by-side comparison.
+### Lossless and lossy compressions
 - With lossless compression, every bit of data originally in a file remains after it is uncompressed, and all the information is restored. 
 - Lossy compression reduces a file by permanently eliminating certain information, especially redundant information.
+### Chroma: 
+The general form is J: a: b, and this describes how many chroma samples are taken per block of Jx2 pixels. In the first row of that block, we sample a pixels for color. In the next row of this block, we sample b pixels for color. As a reminder, luminance is always sampled at every pixel.
+
+#### 4: 4: 4
+This is uncompressed video. Four chroma samples in the first row and four in the second row.
+
+####  4: 4: 0
+Four chroma samples in the first row, and none in the second row. This means that the chroma samples from the first row are also used for the second row. In other words, we halve the vertical resolution, but keep the full horizontal resolution.
+
+#### 4: 2: 2
+Two chroma samples in the first row, and two in the second row. Each chroma sample is used for two columns. This scheme cuts the horizontal resolution in half, but maintains full vertical resolution.
+
+#### 4: 2: 0
+Two chroma samples in the first row, and none in the second row. Each chroma sample is used for two columns and for the row below. This scheme halves the horizontal and vertical resolution.
+
+There are other schemes, some of which even deviate from the conventions described above, but unless you are a professional with video, it is sufficient to know 4: 4: 4, 4: 2: 2, and 4: 2: 0. It is these schemes that you regularly encounter in cameras, and the settings of players.
+![4:4:4; Chroma](/imgs/444.webp)
+
+### Chroma Sampling:
+![Chroma Sampling](/imgs/chroma%20sampling.webp)
 ### Transparency 
-There are 3 major types of transparency:
-  - First type - None
-     - the bitmap is a rectangle and will obscure every pixel below it
-  - Second type - binary
-     - either completely transparent or completely opaque
-  - Third type - Many bits of transparency (commonly 8)
-     - i.e. 256 values from 0-100% for each pixel
-     - provide an image that has finer graduations than the human eye can discern### Image Sizes
 
-### RGB component 
-1. storing color value itself,
-   - RGB component
-     - least effective as human eyes can capture more color
-     - inefficient for common operations such as brighten
-2. transparency of each pixel
-   - critical for edge of non-rectangular images
-   - each pixel needs to have its level of transparency(opacity) set from 0% to 100%
-3. Bitmap metadata
-   - information about the image which can range from color table and resolution to the owner of the image
+In this part, we will dicuss the transparency of images.
+First, we want to discuss the detals of how 2 colors are to be composited. 
+Two grayscale colors to be composited. Grayscale values are considered to be numbers between 0.0(white) and 1.0 (black)
 
-Due to the large amount of byte a bitmap takes up, compression is **the key for a new format to develop**.
 
-### DPI
-- DPI stands for Dots Per Inch. This is a term, originally from printing, that refers to how many printed dots there are in one inch of your printed document. It’s now a term used across computing to allow you to determine the quality and resolution of a photo or image.
-- The higher the value, the more detailed and sharper your image will be. Images with higher DPI values can also be zoomed in much further before pixelation begins to occur.
-
-## Image Optimization (Compression)
 ## Image formats:
+- Bitmap(Raster) images  represent an image by encoding the individual values of each pixel within a rectangular grid.
 - Vector graphics use lines, points, and polygons to represent an image.
-- Raster graphics represent an image by encoding the individual values of each pixel within a rectangular grid.
-
-However, vector formats fall short when the scene is complicated.
-
 ## Bitmap Images (Raster Images)
 
 - A bitmap is an array of bits that specifies the color of each pixel in a rectangular array of pixels. 
@@ -93,21 +104,21 @@ Some bitmaps have no need for a color table. For instance, if a bitmap uses 24 b
 
 ## Graphic File formats for saving bitmaps in files.
 Windows GDI+ supports the graphics file formats:
-
-- Bitmap (BMP)
-
+### Bitmap (BMP)
     - is a standard format used by Windows to store device-independent and application-independent images. 
     - The number of bits per pixel (1, 4, 8, 15, 24, 32, or 64) for a given BMP file is specified in a file header. 
     - BMP files with 24 bits per pixel are common.
-
-- Graphics Interchange Format (GIF)
+### Graphics Interchange Format (GIF)
     - a common format for images that appear on Web pages. 
     - GIFs work well for line drawings, pictures with blocks of solid color, and pictures with sharp boundaries between colors. 
     - GIFs are compressed, but no information is lost in the compression process; a decompressed image is exactly the same as the original.
     - **One color** in a GIF can be designated as transparent, so that the image will have the background color of any Web page that displays it. 
     - A sequence of GIF images can be stored in a single file to form an animated GIF. 
     - GIFs store at most 8 bits per pixel, so they are limited to 256 colors.
-- Joint Photographic Experts Group (JPEG)
+### Joint Photographic Experts Group (JPEG)
+    - Lossy compression format
+    - Doesn't support transparency, animation, depth maps or overlays.
+    - Works best with photographs
     - JPEG is a compression scheme that works well for natural scenes, such as scanned photographs. 
     - Some information is lost in the compression process, but often the loss is imperceptible to the human eye. 
     - Color JPEG images store 24 bits per pixel, so they are capable of displaying more than 16 million colors. 
@@ -123,33 +134,34 @@ Windows GDI+ supports the graphics file formats:
     > ![jpeg and gif compressed from bmp images](/imgs/jpeg%20and%20gif%20compressed%20from%20bmp.gif)
 
     > Note that JPEG is a compression scheme, not a file format. JPEG File Interchange Format (JFIF) is a file format commonly used for storing and transferring images that have been compressed according to the JPEG scheme. JFIF files displayed by Web browsers use the .jpg extension.
-
-- Exchangeable Image File (Exif)
+### Exchangeable Image File (Exif)
     - Exif is a file format used for photographs captured by digital cameras. 
     - An Exif file contains an image that is compressed according to the JPEG specification. 
     - An Exif file also contains information about the photograph (date taken, shutter speed, exposure time, and so on) and information about the camera (manufacturer, model, and so on).
-- Portable Network Graphics (PNG)
+###  Portable Network Graphics (PNG)
+    - Lossless format
+    - Can support alpha transparency
+    - Compression is low.
     - The PNG format retains many of the advantages of the GIF format but also provides capabilities beyond those of GIF. 
     - Like GIF files, PNG files are compressed with no loss of information. 
     - PNG files can store colors with 8, 24, or 48 bits per pixel and gray scales with 1, 2, 4, 8, or 16 bits per pixel. 
     - In contrast, GIF files can use only 1, 2, 4, or 8 bits per pixel. A PNG file can also store an alpha value for each pixel, which specifies the degree to which the color of that pixel is blended with the background color.
     - PNG improves on GIF in its ability to progressively display an image; that is, to display better and better approximations of the image as it arrives over a network connection. 
     - PNG files can contain gamma correction and color correction information so that the images can be accurately rendered on a variety of display devices.
-
-- Tag Image File Format (TIFF)
+### Tag Image File Format (TIFF)
     - TIFF is a flexible and extendable format that is supported by a wide variety of platforms and image-processing applications. 
     - TIFF files can store images with an arbitrary number of bits per pixel and can employ a variety of compression algorithms. 
     - Several images can be stored in a single, multiple-page TIFF file. 
     - Information related to the image (scanner make, host computer, type of compression, orientation, samples per pixel, and so on) can be stored in the file and arranged through the use of tags. 
     - The TIFF format can be extended as needed by the approval and addition of new tags.
 
-- WebP
+### WebP
     - Superior lossless and lossy compression for images on the web. 
     - Are used to create  smaller, richer images that make the web faster.
     - WebP lossless images are 26% smaller in size compared to PNGs. WebP lossy images are 25-34% smaller than comparable JPEG images at equivalent SSIM quality index.
     - Lossy WebP compression uses predictive coding to encode an image, the same method used by the VP8 video codec to compress keyframes in videos. Predictive coding uses the values in neighboring blocks of pixels to predict the values in a block, and then encodes only the difference.
     - Lossless WebP compression uses already seen image fragments in order to exactly reconstruct new pixels. It can also use a local palette if no interesting match is found.
-- AVIF 
+### AVIF 
     - AVIF is a solid first choice if lossy, low-fidelity compression is acceptable and saving bandwidth is the number one priority. Assuming encode/decode speeds meet your needs.
     - AVIF supports very efficient lossy and lossless compression to produce high-quality images after compression
     - Some tests have shown that AVIF offers a 50% saving in file size compared to JPEG with similar perceptual quality.
@@ -232,7 +244,10 @@ The browser uses the first listed source in a format it supports.
 If the browser does not support any of the formats listed in the ```<source>``` tag, it falls back to loading the images specified by the ```<img>``` tag.
 
     - The <source> tag for the "preferred" image format (in this case that is WebP) should be listed first, before other <source> tags. 
-    - The value of the type attribute should be the MIME type corresponding to the image format. An image's MIME type and its file extension are often similar, but they aren't necessarily the same thing (e.g. .jpg vs. image/jpeg).
+    - The value of the type attribute should be the MIME type corresponding to the image format. An image's MIME type and its file extension are often similar, but sthey aren't necessarily the same thing (e.g. .jpg vs. image/jpeg).
+
+### The ```<img>``` tag 
+
 ## Accessibility
 
 ### alt attributes
